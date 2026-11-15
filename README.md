@@ -100,6 +100,47 @@ heavy-tailed data (see finding 3 below). With revival off, e-means beats
 k-means on that dataset too: −16.7% at T = 5, and −12.7% against converged
 k-means.
 
+### Speed
+
+These are wall-clock times on an Apple M1 (8 threads, faiss 1.16 CPU). Each
+job ran alone on an otherwise idle machine. The library's
+`NumpyEmeans.train` (default settings) is compared with `faiss.Kmeans`, both
+from the same initial centroids. Times are medians of 3 seeds, and errors are
+means. *The target is "converged k-means quality": held-out MSE within 0.1%
+of k-means after 50 iterations.
+
+| dataset | e-means s/epoch | k-means s/iter | e-means: epochs → time to reach target* | k-means: iters → time | speedup | k-means@50 time |
+|---|---|---|---|---|---|---|
+| gmm-d32 | 0.58 | 0.50 | 1 → 0.6 s | 20 → 10.3 s | **16.5×** | 19.5 s |
+| uniform-d64 | 0.63 | 0.54 | 1 → 0.6 s | 2 → 1.1 s | 1.9× | 27.4 s |
+| gmm-d2 | 0.06 | 0.01 | 3 → 0.3 s | 50 → 0.5 s | 2.1× | 0.5 s |
+| covtype (z-scored) | 1.37 | 1.56 | never | 50 → 66.0 s | — | 66.0 s |
+| covtype (z), `unused_threshold=0` | 1.37 | 1.56 | 2 → 2.8 s | 50 → 66.0 s | **23.9×** | 66.0 s |
+| covtype-minmax | 1.37 | 1.29 | 3 → 4.1 s | 50 → 64.4 s | **15.6×** | 64.4 s |
+| mnist | 0.17 | 0.10 | 2 → 0.3 s | 30 → 2.8 s | **8.3×** | 5.1 s |
+
+![speed](figures/speed.png)
+
+* **An e-means epoch costs about the same as a k-means iteration**: 0.9× to
+  1.2× on the larger datasets. Both spend their time in faiss's
+  nearest-centroid search. On small or low-dimensional problems, e-means'
+  per-batch Python overhead shows. An epoch costs 1.75× as much on mnist and
+  about 5× on gmm-d2, which uses small "quality" batches and has a tiny per
+  iteration cost.
+* **e-means needs far fewer passes, so it wins on time anyway.** Matching
+  converged k-means is **8–24× faster** on the structured datasets. It is
+  about 2× faster on gmm-d2, where the per-epoch overhead eats most of the
+  gain, and on uniform noise, where both are done almost immediately. This
+  agrees with the paper's "~10× wall-clock" claim.
+* **In practice the speedup is larger than the table shows.** At its default
+  5 epochs, e-means is *better* than k-means after 50 iterations on gmm-d32
+  (−7.9%), gmm-d2, covtype-minmax and mnist. Within 50 iterations, k-means
+  never reaches e-means' 5-epoch quality on those datasets.
+* **On z-scored covtype, e-means at default settings never gets there,**
+  because of the revival problem. With the library's own switch for turning
+  revival off (`unused_threshold=0`), it reaches the target in 2 epochs and
+  is 24× faster.
+
 ### Ladder
 
 ![ladder](figures/ladder.png)
@@ -182,9 +223,10 @@ The other epoch budgets, and the change at each step, are in
 6. **The batch law is roughly neutral.** A fixed B = 1024 changes MSE by
    about ±2%, and it is often slightly better because it makes more updates.
    It is worse on covtype-minmax (+1.5% to +1.9%). Z-scored covtype is noisy
-   (−16% at T = 5) because of the revival problem above. The batch law matters more for
-   throughput (larger batches mean fewer, cheaper Python and kernel calls),
-   and wall-clock time was not measured here.
+   (−16% at T = 5) because of the revival problem above. The batch law
+   matters more for throughput. Larger batches mean fewer Python and kernel
+   calls per epoch, which is why gmm-d2's small batches cost about 5× more
+   per epoch than k-means (see Speed).
 
 7. **Reshuffling each epoch is negligible** (about ±1%; z-scored covtype is
    again the noisy exception).
@@ -206,9 +248,11 @@ shuffling are second-order.
 * 3 seeds per cell. Of the variant-vs-e-means differences larger than 1%,
   152 of 175 have the same sign on all 3 seeds. Per-seed values are in
   `results/runs-*.jsonl`.
-* Wall-clock times are recorded in `results/runs-*.jsonl` but are **not
-  comparable**: the datasets ran as concurrent processes on one machine.
-  These are epoch-for-epoch comparisons only.
+* The `time` fields in `results/runs-*.jsonl` are **not comparable**: the
+  ablation grid ran its datasets as concurrent processes. Every speed number
+  in this README comes from the separate run in `ablation/timing.py`
+  (`results/timing.jsonl`), where each job ran alone. Speed was measured on
+  CPU only. The GPU kernels (Triton/CuTe) were not timed.
 * The pure Lloyd rung leaves empty clusters where they are. `faiss.Kmeans`
   re-seeds them, so on mostly random data (uniform-d64) the two can differ
   slightly. The baseline columns always use `faiss.Kmeans`.
@@ -220,7 +264,8 @@ python -m venv .venv && .venv/bin/pip install -r requirements.txt
 cd ablation
 ../.venv/bin/python check_equivalence.py   # harness == reference e-means, and == Lloyd
 ../.venv/bin/python run.py --seeds 3       # ~1-2 h on a laptop; resumable
-../.venv/bin/python analyze.py             # results/tables.md and figures/*.png
+../.venv/bin/python timing.py --seeds 3    # clean wall-clock run; keep the machine idle
+../.venv/bin/python analyze.py             # results/*.md and figures/*.png
 ```
 
 The e-means code in `vendor/` is © Meta Platforms, Inc., under the MIT

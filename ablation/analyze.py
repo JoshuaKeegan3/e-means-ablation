@@ -143,6 +143,8 @@ def pct_axis(ax, which="y"):
     axis = ax.yaxis if which == "y" else ax.xaxis
     lo, hi = (ax.get_ylim() if which == "y" else ax.get_xlim())
     ticks = PCT_TICKS if hi - lo > 30 else sorted(PCT_TICKS + [-2, -1, 1, 2])
+    if hi - lo < 3:
+        ticks = [-1, -0.5, -0.25, 0, 0.25, 0.5, 1]
     axis.set_major_locator(FixedLocator([t for t in ticks if lo <= t <= hi]))
     axis.set_minor_locator(NullLocator())
     axis.set_major_formatter(FuncFormatter(lambda v, _: "%+g%%" % v if v else "0"))
@@ -245,3 +247,82 @@ def plot_curves(vals, datasets, epochs, ladder):
 
 if __name__ == "__main__":
     main()
+
+
+# -- wall-clock (results/timing.jsonl, from timing.py) -------------------------
+def timing():
+    path = os.path.join(ROOT, "results", "timing.jsonl")
+    if not os.path.exists(path):
+        return
+    R = defaultdict(list)
+    for line in open(path):
+        r = json.loads(line)
+        R[(r["dataset"], r["algo"], r["epochs"])].append((r["time"], r["test_mse"]))
+    t = lambda d, a, e: float(np.median([x for x, _ in R[(d, a, e)]]))  # noqa: E731
+    m = lambda d, a, e: float(np.mean([y for _, y in R[(d, a, e)]]))  # noqa: E731
+    datasets = [d for d in ["gmm-d32", "uniform-d64", "gmm-d2", "covtype",
+                            "covtype-minmax", "mnist"] if (d, "kmeans", 50) in R]
+    algos = lambda d: [a for a in ("e-means", "e-means unused_threshold=0")  # noqa: E731
+                       if (d, a, 5) in R]
+    em_T = sorted({e for (d, a, e) in R if a == "e-means"})
+    km_N = sorted({e for (d, a, e) in R if a == "kmeans"})
+    md = ["| dataset | e-means s/epoch | k-means s/iter | e-means epochs → time to reach "
+          "converged k-means* | k-means iters → time | speedup | k-means@50 time |",
+          "|---|---|---|---|---|---|---|"]
+    for d in datasets:
+        target = m(d, "kmeans", 50) * 1.001
+        kN = next(e for e in km_N if m(d, "kmeans", e) <= target)
+        for a in algos(d):
+            eT = next((e for e in em_T if m(d, a, e) <= target), None)
+            label = d + (" (revival off)" if "=0" in a else "")
+            md.append("| %s | %.2f | %.2f | %s | %d → %.1f s | %s | %.1f s |" % (
+                label, t(d, a, 5) / 5, t(d, "kmeans", 5) / 5,
+                "never" if eT is None else "%g → %.1f s" % (eT, t(d, a, eT)),
+                kN, t(d, "kmeans", kN),
+                "—" if eT is None else "**%.1f×**" % (t(d, "kmeans", kN) / t(d, a, eT)),
+                t(d, "kmeans", 50)))
+    open(os.path.join(ROOT, "results", "timing.md"), "w").write("\n".join(md) + "\n")
+    print("\n".join(md))
+
+    fig, axes = grid(len(datasets))
+    axes = list(axes)
+    for ax, d in zip(axes, datasets):
+        ref = m(d, "kmeans", 50)
+        series = [("kmeans", km_N, "k-means (faiss)", SERIES[5])]
+        series += [(a, em_T, "e-means" + (" (revival off)" if "=0" in a else ""),
+                    SERIES[0] if "=0" not in a else SERIES[2]) for a in algos(d)]
+        for a, es, label, col in series:
+            xs = [t(d, a, e) for e in es]
+            ys = [100 * (m(d, a, e) / ref - 1) for e in es]
+            ax.plot(xs, ys, "-o", color=col, lw=2, ms=4, label=label)
+            for e, x, y in zip(es, xs, ys):
+                if a != "kmeans" or e in (1, 5, 50):
+                    ax.annotate("%g" % e, (x, y), textcoords="offset points",
+                                xytext=(4, 4), fontsize=6.5, color=INK2)
+        ax.axhline(0, color=INK2, ls="--", lw=1)
+        ax.set_xscale("log")
+        from matplotlib.ticker import FixedLocator, FuncFormatter, NullLocator
+        lo, hi = ax.get_xlim()
+        ax.xaxis.set_major_locator(FixedLocator(
+            [v for v in (0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30, 100) if lo <= v <= hi]))
+        ax.xaxis.set_minor_locator(NullLocator())
+        ax.xaxis.set_major_formatter(FuncFormatter(lambda v, _: "%g" % v))
+        ax.set_title(d)
+        ax.set_xlabel("wall-clock seconds (Apple M1, 8 threads)")
+        ax.set_ylabel("held-out MSE vs k-means@50")
+        pct_axis(ax)
+    h, l = [], []
+    for ax in axes:
+        for hh, ll in zip(*ax.get_legend_handles_labels()):
+            if ll not in l:
+                h.append(hh); l.append(ll)  # noqa: E702
+    fig.legend(h, l, loc="lower center", ncol=len(l), frameon=False, fontsize=8)
+    fig.suptitle("Error vs wall-clock time (point labels = epochs / iterations; "
+                 "dashed = k-means after 50 iterations)", fontsize=11)
+    fig.tight_layout(rect=(0, 0.04, 1, 0.96))
+    fig.savefig(os.path.join(FIG, "speed.png"), dpi=150)
+    plt.close(fig)
+
+
+if __name__ == "__main__":
+    timing()
