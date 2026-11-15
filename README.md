@@ -64,6 +64,42 @@ e-means → −revival → −closing → −cosine → −EMA (= Sculley mini-b
 
 ## Results
 
+### e-means vs k-means at a glance
+
+Full e-means (library defaults) against `faiss.Kmeans` started from the same
+initial centroids. Each cell is the change in held-out MSE, as the mean of 3
+seeds. Negative means e-means is better.
+
+**Against k-means run for the same number of epochs (T):**
+
+| dataset | T=1 | T=2 | T=3 | T=5 | T=10 | e-means wins (seed × T) |
+|---|---|---|---|---|---|---|
+| gmm-d32 | **−32.1%** | **−19.7%** | **−14.4%** | **−10.9%** | **−10.2%** | 15 / 15 |
+| uniform-d64 | −0.2% | +0.0% | +0.1% | +0.1% | +0.0% | 3 / 15 (tie) |
+| gmm-d2 | **−28.6%** | **−27.2%** | **−24.7%** | **−21.6%** | **−16.8%** | 15 / 15 |
+| covtype (z-scored) | **−47.6%** | +101.1% | +95.9% | +96.4% | +108.3% | 3 / 15 |
+| covtype-minmax | **−29.6%** | **−14.1%** | **−8.5%** | **−4.5%** | **−2.4%** | 15 / 15 |
+| mnist | **−4.7%** | **−2.7%** | **−1.9%** | **−1.1%** | **−0.6%** | 15 / 15 |
+
+**Against k-means run to convergence (50 iterations):**
+
+| dataset | T=1 | T=2 | T=3 | T=5 | T=10 | epochs to match converged k-means |
+|---|---|---|---|---|---|---|
+| gmm-d32 | +0.1% | −5.5% | −7.3% | −7.9% | −9.3% | 1 (≈50× fewer passes) |
+| uniform-d64 | +0.0% | +0.0% | +0.0% | +0.0% | +0.0% | 1 (tie, no structure to find) |
+| gmm-d2 | +11.7% | +1.9% | −0.1% | −2.1% | −3.8% | 3 |
+| covtype (z-scored) | +120.7% | +127.1% | +112.8% | +105.8% | +112.5% | never (2 with revival off) |
+| covtype-minmax | +2.5% | +0.3% | −0.3% | −0.4% | −0.6% | 3 |
+| mnist | +0.9% | +0.1% | −0.1% | −0.1% | −0.2% | 3 |
+
+On 4 of the 6 datasets, e-means beats k-means at every epoch budget and
+reaches converged k-means quality within 1–3 passes. That is consistent with
+the paper's "~10× fewer epochs" claim. On uniform noise, the two tie. On
+z-scored covtype, e-means fails because its cluster revival breaks on
+heavy-tailed data (see finding 3 below). With revival off, e-means beats
+k-means on that dataset too: −16.7% at T = 5, and −12.7% against converged
+k-means.
+
 ### Ladder
 
 ![ladder](figures/ladder.png)
