@@ -1,0 +1,151 @@
+gmm-d32: n=200000 d=32 k=1024 test=50000
+  gmm-d32      seed=0 T=5    -cosine                            test=89.5657  6.7s
+  gmm-d32      seed=0 T=5    -ema (Sculley)                     test=104.342  4.8s
+  gmm-d32      seed=0 T=5    -batch_law (B=1024)                test=91.8016  5.6s
+  gmm-d32      seed=0 T=5    -step_law (alpha0=B/n)             test=102.83  4.8s
+  gmm-d32      seed=0 T=5    -shuffle                           test=94.1856  5.5s
+  gmm-d32      seed=0 T=10   L0 e-means                         test=91.6616  11.0s
+  gmm-d32      seed=0 T=10   L1 - revival                       test=99.0586  10.4s
+  gmm-d32      seed=0 T=10   L2 - closing means                 test=99.0627  10.7s
+  gmm-d32      seed=0 T=10   L3 - cosine schedule               test=114.395  10.6s
+  gmm-d32      seed=0 T=10   L4 - EMA (= Sculley mini-batch)    test=107.414  10.8s
+  gmm-d32      seed=0 T=10   L5 - mini-batch (= Lloyd)          test=103.248  10.7s
+  gmm-d32      seed=0 T=10   -closing                           test=91.6638  10.9s
+  gmm-d32      seed=0 T=10   -cosine                            test=85.0927  10.3s
+  gmm-d32      seed=0 T=10   -ema (Sculley)                     test=104.256  11.2s
+  gmm-d32      seed=0 T=10   -batch_law (B=1024)                test=90.2332  11.3s
+  gmm-d32      seed=0 T=10   -step_law (alpha0=B/n)             test=103.184  12.9s
+  gmm-d32      seed=0 T=10   -shuffle                           test=91.4654  11.6s
+  gmm-d32      seed=1 T=1    kmeans (faiss)                     test=148.772  1.0s
+  gmm-d32      seed=1 T=2    kmeans (faiss)                     test=119.785  2.6s
+  gmm-d32      seed=1 T=3    kmeans (faiss)                     test=110.788  2.8s
+  gmm-d32      seed=1 T=5    kmeans (faiss)                     test=105.805  5.2s
+  gmm-d32      seed=1 T=10   kmeans (faiss)                     test=103.466  9.6s
+  gmm-d32      seed=1 T=50   kmeans (faiss)                     test=102.104  45.0s
+  gmm-d32      seed=1 T=1    L0 e-means                         test=101.719  2.0s
+  gmm-d32      seed=1 T=1    L1 - revival                       test=109.97  1.4s
+  gmm-d32      seed=1 T=1    L2 - closing means                 test=109.114  1.1s
+  gmm-d32      seed=1 T=1    L3 - cosine schedule               test=109.602  1.4s
+  gmm-d32      seed=1 T=1    L4 - EMA (= Sculley mini-batch)    test=112.52  1.3s
+  gmm-d32      seed=1 T=1    L5 - mini-batch (= Lloyd)          test=148.772  1.2s
+  gmm-d32      seed=1 T=1    -closing                           test=99.6084  2.4s
+  gmm-d32      seed=1 T=1    -cosine                            test=102.393  1.8s
+  gmm-d32      seed=1 T=1    -ema (Sculley)                     test=105.254  1.9s
+  gmm-d32      seed=1 T=1    -batch_law (B=1024)                test=101.094  1.6s
+  gmm-d32      seed=1 T=1    -step_law (alpha0=B/n)             test=104.662  1.3s
+  gmm-d32      seed=1 T=1    -shuffle                           test=101.719  1.1s
+  gmm-d32      seed=1 T=2    L0 e-means                         test=95.4305  2.2s
+  gmm-d32      seed=1 T=2    L1 - revival                       test=103.896  3.2s
+  gmm-d32      seed=1 T=2    L2 - closing means                 test=103.931  2.3s
+  gmm-d32      seed=1 T=2    L3 - cosine schedule               test=104.24  2.3s
+  gmm-d32      seed=1 T=2    L4 - EMA (= Sculley mini-batch)    test=107.106  1.7s
+  gmm-d32      seed=1 T=2    L5 - mini-batch (= Lloyd)          test=119.759  1.7s
+  gmm-d32      seed=1 T=2    -closing                           test=95.3586  1.9s
+  gmm-d32      seed=1 T=2    -cosine                            test=94.1866  2.5s
+  gmm-d32      seed=1 T=2    -ema (Sculley)                     test=101.967  2.7s
+  gmm-d32      seed=1 T=2    -batch_law (B=1024)                test=96.0004  1.9s
+  gmm-d32      seed=1 T=2    -step_law (alpha0=B/n)             test=101.519  1.8s
+  gmm-d32      seed=1 T=2    -shuffle                           test=95.4588  1.9s
+  gmm-d32      seed=1 T=3    L0 e-means                         test=94.5571  2.5s
+  gmm-d32      seed=1 T=3    L1 - revival                       test=103.268  2.6s
+  gmm-d32      seed=1 T=3    L2 - closing means                 test=103.274  2.7s
+  gmm-d32      seed=1 T=3    L3 - cosine schedule               test=103.164  2.8s
+  gmm-d32      seed=1 T=3    L4 - EMA (= Sculley mini-batch)    test=106.575  2.8s
+  gmm-d32      seed=1 T=3    L5 - mini-batch (= Lloyd)          test=110.468  2.6s
+  gmm-d32      seed=1 T=3    -closing                           test=94.5706  2.4s
+  gmm-d32      seed=1 T=3    -cosine                            test=91.6665  2.7s
+  gmm-d32      seed=1 T=3    -ema (Sculley)                     test=101.623  2.9s
+  gmm-d32      seed=1 T=3    -batch_law (B=1024)                test=94.1561  2.6s
+  gmm-d32      seed=1 T=3    -step_law (alpha0=B/n)             test=101.294  2.4s
+  gmm-d32      seed=1 T=3    -shuffle                           test=94.0353  2.6s
+  gmm-d32      seed=1 T=5    L0 e-means                         test=93.4352  4.2s
+  gmm-d32      seed=1 T=5    L1 - revival                       test=100.532  5.3s
+  gmm-d32      seed=1 T=5    L2 - closing means                 test=100.554  4.9s
+  gmm-d32      seed=1 T=5    L3 - cosine schedule               test=101.52  4.6s
+  gmm-d32      seed=1 T=5    L4 - EMA (= Sculley mini-batch)    test=105.517  5.2s
+  gmm-d32      seed=1 T=5    L5 - mini-batch (= Lloyd)          test=105.559  5.6s
+  gmm-d32      seed=1 T=5    -closing                           test=93.4659  5.2s
+  gmm-d32      seed=1 T=5    -cosine                            test=90.2805  4.4s
+  gmm-d32      seed=1 T=5    -ema (Sculley)                     test=102.651  4.5s
+  gmm-d32      seed=1 T=5    -batch_law (B=1024)                test=93.0351  4.9s
+  gmm-d32      seed=1 T=5    -step_law (alpha0=B/n)             test=102.338  4.7s
+  gmm-d32      seed=1 T=5    -shuffle                           test=93.4196  5.8s
+  gmm-d32      seed=1 T=10   L0 e-means                         test=92.574  7.6s
+  gmm-d32      seed=1 T=10   L1 - revival                       test=98.9626  7.7s
+  gmm-d32      seed=1 T=10   L2 - closing means                 test=98.966  7.9s
+  gmm-d32      seed=1 T=10   L3 - cosine schedule               test=114.359  7.5s
+  gmm-d32      seed=1 T=10   L4 - EMA (= Sculley mini-batch)    test=106.279  8.1s
+  gmm-d32      seed=1 T=10   L5 - mini-batch (= Lloyd)          test=103.33  11.5s
+  gmm-d32      seed=1 T=10   -closing                           test=92.5871  8.5s
+  gmm-d32      seed=1 T=10   -cosine                            test=86.61  9.1s
+  gmm-d32      seed=1 T=10   -ema (Sculley)                     test=103.686  7.4s
+  gmm-d32      seed=1 T=10   -batch_law (B=1024)                test=90.3125  7.3s
+  gmm-d32      seed=1 T=10   -step_law (alpha0=B/n)             test=102.702  7.8s
+  gmm-d32      seed=1 T=10   -shuffle                           test=94.555  8.4s
+  gmm-d32      seed=2 T=1    kmeans (faiss)                     test=149.086  0.6s
+  gmm-d32      seed=2 T=2    kmeans (faiss)                     test=118.881  1.4s
+  gmm-d32      seed=2 T=3    kmeans (faiss)                     test=108.789  1.9s
+  gmm-d32      seed=2 T=5    kmeans (faiss)                     test=103.482  3.0s
+  gmm-d32      seed=2 T=10   kmeans (faiss)                     test=100.875  6.6s
+  gmm-d32      seed=2 T=50   kmeans (faiss)                     test=99.8646  25.7s
+  gmm-d32      seed=2 T=1    L0 e-means                         test=101.339  0.7s
+  gmm-d32      seed=2 T=1    L1 - revival                       test=108.655  0.7s
+  gmm-d32      seed=2 T=1    L2 - closing means                 test=107.832  0.7s
+  gmm-d32      seed=2 T=1    L3 - cosine schedule               test=107.541  0.6s
+  gmm-d32      seed=2 T=1    L4 - EMA (= Sculley mini-batch)    test=110.214  0.6s
+  gmm-d32      seed=2 T=1    L5 - mini-batch (= Lloyd)          test=149.086  0.8s
+  gmm-d32      seed=2 T=1    -closing                           test=99.456  0.8s
+  gmm-d32      seed=2 T=1    -cosine                            test=101.133  0.7s
+  gmm-d32      seed=2 T=1    -ema (Sculley)                     test=104.374  2.0s
+  gmm-d32      seed=2 T=1    -batch_law (B=1024)                test=99.5961  1.2s
+  gmm-d32      seed=2 T=1    -step_law (alpha0=B/n)             test=103.631  1.3s
+  gmm-d32      seed=2 T=1    -shuffle                           test=101.339  1.2s
+  gmm-d32      seed=2 T=2    L0 e-means                         test=96.032  1.7s
+  gmm-d32      seed=2 T=2    L1 - revival                       test=101.423  1.7s
+  gmm-d32      seed=2 T=2    L2 - closing means                 test=101.438  1.6s
+  gmm-d32      seed=2 T=2    L3 - cosine schedule               test=101.963  1.5s
+  gmm-d32      seed=2 T=2    L4 - EMA (= Sculley mini-batch)    test=105.342  1.5s
+  gmm-d32      seed=2 T=2    L5 - mini-batch (= Lloyd)          test=118.881  2.0s
+  gmm-d32      seed=2 T=2    -closing                           test=96.0881  2.5s
+  gmm-d32      seed=2 T=2    -cosine                            test=94.5119  2.6s
+  gmm-d32      seed=2 T=2    -ema (Sculley)                     test=100.592  2.5s
+  gmm-d32      seed=2 T=2    -batch_law (B=1024)                test=95.2084  2.7s
+  gmm-d32      seed=2 T=2    -step_law (alpha0=B/n)             test=100.295  1.7s
+  gmm-d32      seed=2 T=2    -shuffle                           test=95.7339  1.5s
+  gmm-d32      seed=2 T=3    L0 e-means                         test=93.6125  2.5s
+  gmm-d32      seed=2 T=3    L1 - revival                       test=99.4458  2.2s
+  gmm-d32      seed=2 T=3    L2 - closing means                 test=99.4686  2.2s
+  gmm-d32      seed=2 T=3    L3 - cosine schedule               test=99.7695  2.2s
+  gmm-d32      seed=2 T=3    L4 - EMA (= Sculley mini-batch)    test=104.165  2.2s
+  gmm-d32      seed=2 T=3    L5 - mini-batch (= Lloyd)          test=108.547  2.2s
+  gmm-d32      seed=2 T=3    -closing                           test=93.6528  2.5s
+  gmm-d32      seed=2 T=3    -cosine                            test=92.8608  2.5s
+  gmm-d32      seed=2 T=3    -ema (Sculley)                     test=99.8708  3.4s
+  gmm-d32      seed=2 T=3    -batch_law (B=1024)                test=93.6509  2.2s
+  gmm-d32      seed=2 T=3    -step_law (alpha0=B/n)             test=99.6192  2.1s
+  gmm-d32      seed=2 T=3    -shuffle                           test=94.9302  2.1s
+  gmm-d32      seed=2 T=5    L0 e-means                         test=93.08  3.3s
+  gmm-d32      seed=2 T=5    L1 - revival                       test=98.1421  3.2s
+  gmm-d32      seed=2 T=5    L2 - closing means                 test=98.1522  3.2s
+  gmm-d32      seed=2 T=5    L3 - cosine schedule               test=99.6656  3.2s
+  gmm-d32      seed=2 T=5    L4 - EMA (= Sculley mini-batch)    test=103.883  3.4s
+  gmm-d32      seed=2 T=5    L5 - mini-batch (= Lloyd)          test=103.213  3.6s
+  gmm-d32      seed=2 T=5    -closing                           test=93.1044  3.4s
+  gmm-d32      seed=2 T=5    -cosine                            test=90.0614  3.2s
+  gmm-d32      seed=2 T=5    -ema (Sculley)                     test=98.9205  3.3s
+  gmm-d32      seed=2 T=5    -batch_law (B=1024)                test=92.5387  3.3s
+  gmm-d32      seed=2 T=5    -step_law (alpha0=B/n)             test=98.799  4.1s
+  gmm-d32      seed=2 T=5    -shuffle                           test=94.2249  3.8s
+  gmm-d32      seed=2 T=10   L0 e-means                         test=91.9356  6.7s
+  gmm-d32      seed=2 T=10   L1 - revival                       test=96.5428  6.6s
+  gmm-d32      seed=2 T=10   L2 - closing means                 test=96.5465  6.7s
+  gmm-d32      seed=2 T=10   L3 - cosine schedule               test=110.41  10.2s
+  gmm-d32      seed=2 T=10   L4 - EMA (= Sculley mini-batch)    test=102.919  10.1s
+  gmm-d32      seed=2 T=10   L5 - mini-batch (= Lloyd)          test=100.87  7.5s
+  gmm-d32      seed=2 T=10   -closing                           test=91.9465  7.6s
+  gmm-d32      seed=2 T=10   -cosine                            test=84.672  7.1s
+  gmm-d32      seed=2 T=10   -ema (Sculley)                     test=99.1435  6.7s
+  gmm-d32      seed=2 T=10   -batch_law (B=1024)                test=90.7159  7.3s
+  gmm-d32      seed=2 T=10   -step_law (alpha0=B/n)             test=97.1522  7.1s
+  gmm-d32      seed=2 T=10   -shuffle                           test=93.3357  8.0s
+total 863s

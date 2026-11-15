@@ -1,0 +1,5 @@
+faiss-cpu>=1.12
+numpy>=2.0
+scipy
+scikit-learn
+matplotlib

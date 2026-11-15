@@ -1,0 +1,200 @@
+covtype: n=500000 d=54 k=1024 test=81012
+  covtype      seed=0 T=1    kmeans (faiss)                     test=7.7115  2.7s
+  covtype      seed=0 T=2    kmeans (faiss)                     test=2.97743  5.0s
+  covtype      seed=0 T=3    kmeans (faiss)                     test=2.90545  7.2s
+  covtype      seed=0 T=5    kmeans (faiss)                     test=2.84324  14.6s
+  covtype      seed=0 T=10   kmeans (faiss)                     test=2.79219  26.9s
+  covtype      seed=0 T=50   kmeans (faiss)                     test=2.75551  139.3s
+  covtype      seed=0 T=1    L0 e-means                         test=4.38456  2.3s
+  covtype      seed=0 T=1    L1 - revival                       test=4.2791  2.6s
+  covtype      seed=0 T=1    L2 - closing means                 test=1.77524  3.9s
+  covtype      seed=0 T=1    L3 - cosine schedule               test=1.68143  5.8s
+  covtype      seed=0 T=1    L4 - EMA (= Sculley mini-batch)    test=5.18206  7.5s
+  covtype      seed=0 T=1    L5 - mini-batch (= Lloyd)          test=7.7115  3.8s
+  covtype      seed=0 T=1    -closing                           test=4.05269  6.2s
+  covtype      seed=0 T=1    -cosine                            test=5.69067  5.5s
+  covtype      seed=0 T=1    -ema (Sculley)                     test=5.18033  3.2s
+  covtype      seed=0 T=1    -batch_law (B=1024)                test=4.10083  5.7s
+  covtype      seed=0 T=1    -step_law (alpha0=B/n)             test=5.18169  2.8s
+  covtype      seed=0 T=1    -shuffle                           test=4.38456  2.3s
+  covtype      seed=0 T=2    L0 e-means                         test=4.47003  6.7s
+  covtype      seed=0 T=2    L1 - revival                       test=1.64867  4.8s
+  covtype      seed=0 T=2    L2 - closing means                 test=1.64791  4.7s
+  covtype      seed=0 T=2    L3 - cosine schedule               test=1.66953  4.6s
+  covtype      seed=0 T=2    L4 - EMA (= Sculley mini-batch)    test=5.12655  5.0s
+  covtype      seed=0 T=2    L5 - mini-batch (= Lloyd)          test=2.97745  4.3s
+  covtype      seed=0 T=2    -closing                           test=4.09646  5.3s
+  covtype      seed=0 T=2    -cosine                            test=4.45543  4.2s
+  covtype      seed=0 T=2    -ema (Sculley)                     test=2.81745  4.5s
+  covtype      seed=0 T=2    -batch_law (B=1024)                test=4.39573  8.0s
+  covtype      seed=0 T=2    -step_law (alpha0=B/n)             test=2.8163  5.0s
+  covtype      seed=0 T=2    -shuffle                           test=4.00171  5.5s
+  covtype      seed=0 T=3    L0 e-means                         test=4.01339  8.3s
+  covtype      seed=0 T=3    L1 - revival                       test=1.63986  7.0s
+  covtype      seed=0 T=3    L2 - closing means                 test=1.64011  8.2s
+  covtype      seed=0 T=3    L3 - cosine schedule               test=1.66347  9.2s
+  covtype      seed=0 T=3    L4 - EMA (= Sculley mini-batch)    test=5.06505  5.3s
+  covtype      seed=0 T=3    L5 - mini-batch (= Lloyd)          test=2.91105  6.7s
+  covtype      seed=0 T=3    -closing                           test=4.00742  6.3s
+  covtype      seed=0 T=3    -cosine                            test=4.32604  6.0s
+  covtype      seed=0 T=3    -ema (Sculley)                     test=2.80986  6.4s
+  covtype      seed=0 T=3    -batch_law (B=1024)                test=3.98939  12.2s
+  covtype      seed=0 T=3    -step_law (alpha0=B/n)             test=5.1869  6.5s
+  covtype      seed=0 T=3    -shuffle                           test=3.98932  7.1s
+  covtype      seed=0 T=5    L0 e-means                         test=4.02542  11.7s
+  covtype      seed=0 T=5    L1 - revival                       test=1.64061  10.9s
+  covtype      seed=0 T=5    L2 - closing means                 test=1.64091  9.5s
+  covtype      seed=0 T=5    L3 - cosine schedule               test=1.70607  8.8s
+  covtype      seed=0 T=5    L4 - EMA (= Sculley mini-batch)    test=3.93196  9.4s
+  covtype      seed=0 T=5    L5 - mini-batch (= Lloyd)          test=2.85041  8.6s
+  covtype      seed=0 T=5    -closing                           test=4.0268  9.1s
+  covtype      seed=0 T=5    -cosine                            test=4.01384  13.2s
+  covtype      seed=0 T=5    -ema (Sculley)                     test=1.69312  10.6s
+  covtype      seed=0 T=5    -batch_law (B=1024)                test=4.0016  19.4s
+  covtype      seed=0 T=5    -step_law (alpha0=B/n)             test=4.06117  10.1s
+  covtype      seed=0 T=5    -shuffle                           test=4.01853  9.9s
+  covtype      seed=0 T=10   L0 e-means                         test=4.02498  21.3s
+  covtype      seed=0 T=10   L1 - revival                       test=1.64829  17.6s
+  covtype      seed=0 T=10   L2 - closing means                 test=1.64853  19.3s
+  covtype      seed=0 T=10   L3 - cosine schedule               test=1.67278  17.9s
+  covtype      seed=0 T=10   L4 - EMA (= Sculley mini-batch)    test=3.88863  24.8s
+  covtype      seed=0 T=10   L5 - mini-batch (= Lloyd)          test=2.79963  20.2s
+  covtype      seed=0 T=10   -closing                           test=4.02402  20.7s
+  covtype      seed=0 T=10   -cosine                            test=4.04357  20.2s
+  covtype      seed=0 T=10   -ema (Sculley)                     test=4.07053  17.8s
+  covtype      seed=0 T=10   -batch_law (B=1024)                test=4.00576  38.9s
+  covtype      seed=0 T=10   -step_law (alpha0=B/n)             test=1.67084  18.7s
+  covtype      seed=0 T=10   -shuffle                           test=4.03334  18.0s
+  covtype      seed=1 T=1    kmeans (faiss)                     test=8.77402  1.6s
+  covtype      seed=1 T=2    kmeans (faiss)                     test=1.88663  4.0s
+  covtype      seed=1 T=3    kmeans (faiss)                     test=1.8087  6.6s
+  covtype      seed=1 T=5    kmeans (faiss)                     test=1.73867  7.1s
+  covtype      seed=1 T=10   kmeans (faiss)                     test=1.68295  16.2s
+  covtype      seed=1 T=50   kmeans (faiss)                     test=1.64784  126.8s
+  covtype      seed=1 T=1    L0 e-means                         test=4.13264  2.4s
+  covtype      seed=1 T=1    L1 - revival                       test=4.13028  2.1s
+  covtype      seed=1 T=1    L2 - closing means                 test=3.94077  1.7s
+  covtype      seed=1 T=1    L3 - cosine schedule               test=1.71226  3.5s
+  covtype      seed=1 T=1    L4 - EMA (= Sculley mini-batch)    test=4.18404  3.0s
+  covtype      seed=1 T=1    L5 - mini-batch (= Lloyd)          test=8.77402  1.6s
+  covtype      seed=1 T=1    -closing                           test=3.93818  1.4s
+  covtype      seed=1 T=1    -cosine                            test=5.00996  2.5s
+  covtype      seed=1 T=1    -ema (Sculley)                     test=4.17809  1.5s
+  covtype      seed=1 T=1    -batch_law (B=1024)                test=4.38189  4.4s
+  covtype      seed=1 T=1    -step_law (alpha0=B/n)             test=4.17828  1.7s
+  covtype      seed=1 T=1    -shuffle                           test=4.13264  2.0s
+  covtype      seed=1 T=2    L0 e-means                         test=4.49608  3.6s
+  covtype      seed=1 T=2    L1 - revival                       test=1.69406  4.8s
+  covtype      seed=1 T=2    L2 - closing means                 test=1.69387  5.5s
+  covtype      seed=1 T=2    L3 - cosine schedule               test=1.71709  7.6s
+  covtype      seed=1 T=2    L4 - EMA (= Sculley mini-batch)    test=4.16825  6.5s
+  covtype      seed=1 T=2    L5 - mini-batch (= Lloyd)          test=1.88666  14.3s
+  covtype      seed=1 T=2    -closing                           test=4.19178  2.8s
+  covtype      seed=1 T=2    -cosine                            test=4.54461  2.9s
+  covtype      seed=1 T=2    -ema (Sculley)                     test=4.11568  3.1s
+  covtype      seed=1 T=2    -batch_law (B=1024)                test=4.45468  5.5s
+  covtype      seed=1 T=2    -step_law (alpha0=B/n)             test=4.12817  2.7s
+  covtype      seed=1 T=2    -shuffle                           test=4.04805  3.1s
+  covtype      seed=1 T=3    L0 e-means                         test=4.04872  6.1s
+  covtype      seed=1 T=3    L1 - revival                       test=1.68649  7.4s
+  covtype      seed=1 T=3    L2 - closing means                 test=1.68636  10.6s
+  covtype      seed=1 T=3    L3 - cosine schedule               test=1.70787  16.5s
+  covtype      seed=1 T=3    L4 - EMA (= Sculley mini-batch)    test=4.15662  9.6s
+  covtype      seed=1 T=3    L5 - mini-batch (= Lloyd)          test=1.81366  12.1s
+  covtype      seed=1 T=3    -closing                           test=4.04564  9.6s
+  covtype      seed=1 T=3    -cosine                            test=4.04593  6.2s
+  covtype      seed=1 T=3    -ema (Sculley)                     test=4.10816  6.0s
+  covtype      seed=1 T=3    -batch_law (B=1024)                test=4.00304  11.0s
+  covtype      seed=1 T=3    -step_law (alpha0=B/n)             test=4.11528  5.4s
+  covtype      seed=1 T=3    -shuffle                           test=4.0437  5.6s
+  covtype      seed=1 T=5    L0 e-means                         test=3.69918  9.2s
+  covtype      seed=1 T=5    L1 - revival                       test=1.65462  9.8s
+  covtype      seed=1 T=5    L2 - closing means                 test=1.65484  11.7s
+  covtype      seed=1 T=5    L3 - cosine schedule               test=1.7181  10.5s
+  covtype      seed=1 T=5    L4 - EMA (= Sculley mini-batch)    test=4.14054  9.6s
+  covtype      seed=1 T=5    L5 - mini-batch (= Lloyd)          test=1.74889  9.9s
+  covtype      seed=1 T=5    -closing                           test=3.96159  8.8s
+  covtype      seed=1 T=5    -cosine                            test=4.00463  10.7s
+  covtype      seed=1 T=5    -ema (Sculley)                     test=4.1007  12.1s
+  covtype      seed=1 T=5    -batch_law (B=1024)                test=1.89392  18.6s
+  covtype      seed=1 T=5    -step_law (alpha0=B/n)             test=1.71366  11.4s
+  covtype      seed=1 T=5    -shuffle                           test=4.01065  10.1s
+  covtype      seed=1 T=10   L0 e-means                         test=4.02096  13.8s
+  covtype      seed=1 T=10   L1 - revival                       test=1.65598  13.7s
+  covtype      seed=1 T=10   L2 - closing means                 test=1.656  14.2s
+  covtype      seed=1 T=10   L3 - cosine schedule               test=1.67594  15.0s
+  covtype      seed=1 T=10   L4 - EMA (= Sculley mini-batch)    test=3.73423  20.1s
+  covtype      seed=1 T=10   L5 - mini-batch (= Lloyd)          test=1.69533  24.5s
+  covtype      seed=1 T=10   -closing                           test=4.02395  25.0s
+  covtype      seed=1 T=10   -cosine                            test=1.64207  27.7s
+  covtype      seed=1 T=10   -ema (Sculley)                     test=4.10279  23.4s
+  covtype      seed=1 T=10   -batch_law (B=1024)                test=3.98849  71.1s
+  covtype      seed=1 T=10   -step_law (alpha0=B/n)             test=1.69584  44.9s
+  covtype      seed=1 T=10   -shuffle                           test=4.01674  48.8s
+  covtype      seed=2 T=1    kmeans (faiss)                     test=7.73554  2.7s
+  covtype      seed=2 T=2    kmeans (faiss)                     test=1.86876  6.1s
+  covtype      seed=2 T=3    kmeans (faiss)                     test=1.78524  8.5s
+  covtype      seed=2 T=5    kmeans (faiss)                     test=1.71304  12.4s
+  covtype      seed=2 T=10   kmeans (faiss)                     test=1.66647  15.2s
+  covtype      seed=2 T=50   kmeans (faiss)                     test=1.63013  64.3s
+  covtype      seed=2 T=1    L0 e-means                         test=4.10931  1.4s
+  covtype      seed=2 T=1    L1 - revival                       test=4.02655  1.4s
+  covtype      seed=2 T=1    L2 - closing means                 test=2.23394  1.4s
+  covtype      seed=2 T=1    L3 - cosine schedule               test=1.94489  1.4s
+  covtype      seed=2 T=1    L4 - EMA (= Sculley mini-batch)    test=4.06024  1.4s
+  covtype      seed=2 T=1    L5 - mini-batch (= Lloyd)          test=7.73554  1.3s
+  covtype      seed=2 T=1    -closing                           test=4.07783  1.4s
+  covtype      seed=2 T=1    -cosine                            test=4.11911  1.4s
+  covtype      seed=2 T=1    -ema (Sculley)                     test=4.05435  1.4s
+  covtype      seed=2 T=1    -batch_law (B=1024)                test=5.28767  3.5s
+  covtype      seed=2 T=1    -step_law (alpha0=B/n)             test=4.05013  1.4s
+  covtype      seed=2 T=1    -shuffle                           test=4.10931  1.4s
+  covtype      seed=2 T=2    L0 e-means                         test=4.0127  2.7s
+  covtype      seed=2 T=2    L1 - revival                       test=1.6844  2.7s
+  covtype      seed=2 T=2    L2 - closing means                 test=1.68398  2.7s
+  covtype      seed=2 T=2    L3 - cosine schedule               test=1.7023  2.7s
+  covtype      seed=2 T=2    L4 - EMA (= Sculley mini-batch)    test=3.92415  2.7s
+  covtype      seed=2 T=2    L5 - mini-batch (= Lloyd)          test=1.8688  2.7s
+  covtype      seed=2 T=2    -closing                           test=3.91099  2.7s
+  covtype      seed=2 T=2    -cosine                            test=4.03882  2.7s
+  covtype      seed=2 T=2    -ema (Sculley)                     test=4.07079  2.7s
+  covtype      seed=2 T=2    -batch_law (B=1024)                test=4.02983  7.2s
+  covtype      seed=2 T=2    -step_law (alpha0=B/n)             test=4.09192  2.7s
+  covtype      seed=2 T=2    -shuffle                           test=3.98494  2.7s
+  covtype      seed=2 T=3    L0 e-means                         test=4.02963  4.2s
+  covtype      seed=2 T=3    L1 - revival                       test=1.67664  4.2s
+  covtype      seed=2 T=3    L2 - closing means                 test=1.67666  4.1s
+  covtype      seed=2 T=3    L3 - cosine schedule               test=1.69542  4.1s
+  covtype      seed=2 T=3    L4 - EMA (= Sculley mini-batch)    test=3.79105  4.1s
+  covtype      seed=2 T=3    L5 - mini-batch (= Lloyd)          test=1.81139  4.1s
+  covtype      seed=2 T=3    -closing                           test=4.04247  4.1s
+  covtype      seed=2 T=3    -cosine                            test=4.03647  4.1s
+  covtype      seed=2 T=3    -ema (Sculley)                     test=4.09653  4.1s
+  covtype      seed=2 T=3    -batch_law (B=1024)                test=4.04391  10.8s
+  covtype      seed=2 T=3    -step_law (alpha0=B/n)             test=4.09088  4.1s
+  covtype      seed=2 T=3    -shuffle                           test=3.97912  4.2s
+  covtype      seed=2 T=5    L0 e-means                         test=4.02324  6.8s
+  covtype      seed=2 T=5    L1 - revival                       test=1.66288  6.7s
+  covtype      seed=2 T=5    L2 - closing means                 test=1.66301  6.8s
+  covtype      seed=2 T=5    L3 - cosine schedule               test=1.72099  6.8s
+  covtype      seed=2 T=5    L4 - EMA (= Sculley mini-batch)    test=3.56248  6.7s
+  covtype      seed=2 T=5    L5 - mini-batch (= Lloyd)          test=1.7481  6.7s
+  covtype      seed=2 T=5    -closing                           test=4.02295  6.8s
+  covtype      seed=2 T=5    -cosine                            test=4.73205  6.7s
+  covtype      seed=2 T=5    -ema (Sculley)                     test=4.09363  7.4s
+  covtype      seed=2 T=5    -batch_law (B=1024)                test=4.04007  20.4s
+  covtype      seed=2 T=5    -step_law (alpha0=B/n)             test=4.06315  6.8s
+  covtype      seed=2 T=5    -shuffle                           test=4.03024  8.1s
+  covtype      seed=2 T=10   L0 e-means                         test=4.03129  15.1s
+  covtype      seed=2 T=10   L1 - revival                       test=1.6606  13.8s
+  covtype      seed=2 T=10   L2 - closing means                 test=1.6607  13.8s
+  covtype      seed=2 T=10   L3 - cosine schedule               test=1.68212  13.9s
+  covtype      seed=2 T=10   L4 - EMA (= Sculley mini-batch)    test=3.16476  15.1s
+  covtype      seed=2 T=10   L5 - mini-batch (= Lloyd)          test=1.70262  37.7s
+  covtype      seed=2 T=10   -closing                           test=4.03148  37.6s
+  covtype      seed=2 T=10   -cosine                            test=1.65949  36.8s
+  covtype      seed=2 T=10   -ema (Sculley)                     test=4.08777  35.7s
+  covtype      seed=2 T=10   -batch_law (B=1024)                test=4.04279  65.5s
+  covtype      seed=2 T=10   -step_law (alpha0=B/n)             test=1.68544  15.7s
+  covtype      seed=2 T=10   -shuffle                           test=4.03337  15.3s
+total 2713s
